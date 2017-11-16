@@ -1,14 +1,20 @@
 # faye-demo
 simple pub/sub messaging for web
+## Install
+
+```
+npm i faye --save
+```
+
+## Demo Code
+
 1. Start a server
 
 ```
-var http = require('http'),
-    faye = require('faye');
-
-var server = http.createServer(),
-    bayeux = new faye.NodeAdapter({mount: '/'});
-
+const http = require('http');
+const faye = require('faye');
+const server = http.createServer();
+const bayeux = new faye.NodeAdapter({mount: '/'});
 bayeux.attach(server);
 server.listen(8000);
 ```
@@ -16,17 +22,32 @@ server.listen(8000);
 2. Create a client
 
 ```
-var client = new Faye.Client('http://localhost:8000/');
+**Node-Client:**
+const faye = require('faye');
+const client = new Faye.Client('http://localhost:8000/');
 client.subscribe('/messages', function(message) {
   alert('Got a message: ' + message.text);
 });
+client.publish('/messages', {text: 'Hello world'});
+
+**Browse-Client:**
+<script type="text/javascript" src="faye-browser-min.js"></script>
+<script type="text/javascript">
+    var client = new Faye.Client('http://localhost:8000/');
+    //sub
+    client.subscribe('/messages', function(message) {
+      console.log('Got a message: ' + message.text);
+    });
+    //pub
+    client.publish('/messages', {text: 'Hello world'});
+</script>
 
 ```
 
-3. Send messages
+3. Server-side Sub/Pub messages
 
 ```
-client.publish('/messages', {
-  text: 'Hello world'
-});
-```
+const faye = require('faye');
+const bayeux = new faye.NodeAdapter({mount: '/'});
+bayeux.getClient().publish('/messages', {text: 'hello world'})
+``
