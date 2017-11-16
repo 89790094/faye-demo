@@ -1,0 +1,14 @@
+{
+  "name": "faye",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "@liudong",
+  "license": "ISC",
+  "dependencies": {
+    "faye": "^1.2.4"
+  }
+}
