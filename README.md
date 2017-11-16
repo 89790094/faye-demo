@@ -10,6 +10,8 @@ npm i faye --save
 
 1. Start a server
 
+**server.js**
+
 ```
 const http = require('http');
 const faye = require('faye');
@@ -21,16 +23,20 @@ server.listen(8000);
 
 2. Create a client
 
+**Node-Client:client.js**
+
 ```
-**Node-Client:**
 const faye = require('faye');
 const client = new Faye.Client('http://localhost:8000/');
 client.subscribe('/messages', function(message) {
   alert('Got a message: ' + message.text);
 });
 client.publish('/messages', {text: 'Hello world'});
+```
 
-**Browse-Client:**
+**Browse-Client:client.html**
+
+```
 <script type="text/javascript" src="faye-browser-min.js"></script>
 <script type="text/javascript">
     var client = new Faye.Client('http://localhost:8000/');
@@ -44,7 +50,9 @@ client.publish('/messages', {text: 'Hello world'});
 
 ```
 
-3. Server-side Sub/Pub messages
+3. Server-side Publish messages
+
+**publish event**
 
 ```
 const faye = require('faye');
