@@ -50,4 +50,4 @@ client.publish('/messages', {text: 'Hello world'});
 const faye = require('faye');
 const bayeux = new faye.NodeAdapter({mount: '/'});
 bayeux.getClient().publish('/messages', {text: 'hello world'})
-``
+```
